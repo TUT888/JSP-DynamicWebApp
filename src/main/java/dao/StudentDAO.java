@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import model.Student;
 
 public class StudentDAO {
+	String url = "jdbc:mysql://localhost:3306/be8";
+	String dbuser = "root";
+	String dbpassword = "";
+	
 	public Student getStudentByLoginIdAndPassword(String loginId, String password) {
-		String url = "jdbc:mysql://localhost:3306/be8";
-		String dbuser = "root";
-		String dbpassword = "";
-		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection(url, dbuser, dbpassword);
@@ -41,10 +41,6 @@ public class StudentDAO {
 	}
 	
 	public ArrayList<Student> getStudentListByClassName(String className) {
-		String url = "jdbc:mysql://localhost:3306/be8";
-		String dbuser = "root";
-		String dbpassword = "";
-		
 		ArrayList<Student> studentList = new ArrayList<>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -75,10 +71,6 @@ public class StudentDAO {
 	}
 	
 	public boolean addNewStudent(String name, String className, String loginId, String password) {
-		String url = "jdbc:mysql://localhost:3306/be8";
-		String dbuser = "root";
-		String dbpassword = "";
-		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection(url, dbuser, dbpassword);
