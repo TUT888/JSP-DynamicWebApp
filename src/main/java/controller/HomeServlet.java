@@ -39,7 +39,7 @@ public class HomeServlet extends HttpServlet {
 		// Set attribute to pass data to JSP
 		request.setAttribute("studentList", studentList);
 		// Get the request dispatcher for the JSP
-		RequestDispatcher dispatcher = request.getRequestDispatcher("student-list.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
 		// Forward the request and response to the JSP
 		dispatcher.forward(request, response);
 	}

@@ -1,5 +1,6 @@
 package controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,17 +31,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		StudentDAO studentDAO = new StudentDAO();
-
-		Student student = studentDAO.getStudentByLoginIdAndPassword(username, password);
-		
-		if (student != null) {
-			response.sendRedirect("home");
-		} else {
-			response.sendRedirect("login.html");
-		}
+		response.sendRedirect("login.jsp");
 	}
 
 	/**
@@ -48,7 +39,21 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		StudentDAO studentDAO = new StudentDAO();
+
+		Student student = studentDAO.getStudentByLoginIdAndPassword(username, password);
+		
+		if (student != null) {
+			request.setAttribute("studentName", student.getName());
+			RequestDispatcher dispatcher = request.getRequestDispatcher("home");
+			dispatcher.forward(request, response);
+		} else {
+			request.setAttribute("errorMessage", "Login failed");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 }

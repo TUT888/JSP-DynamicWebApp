@@ -12,8 +12,17 @@
 <title>Student</title>
 </head>
 <body>
+	<c:choose>
+	    <c:when test="${studentName != null}">
+	        <p>Welcome student: ${studentName}</p>
+	        <a href="logout">Logout</a>
+	    </c:when>
+	    <c:otherwise>
+	        <a href="login.jsp">Login</a>
+	    </c:otherwise>
+	</c:choose>
+
 	<h1>Student List</h1>
-	
 	<table>
 		<thead>
 			<tr>

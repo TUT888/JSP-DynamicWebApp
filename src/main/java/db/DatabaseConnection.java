@@ -1,3 +1,4 @@
+package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -5,9 +6,9 @@ import java.sql.SQLException;
 public class DatabaseConnection {
 	private static String url = "jdbc:mysql://localhost:3306/be8";
 	private static String dbuser = "root";
-	private static String dbpassword = "root";
-	
-	public static Connection getStudentByLoginIdAndPassword(String loginId, String password) {
+	private static String dbpassword = "alicelocal";
+	 
+	public static Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection connection = DriverManager.getConnection(url, dbuser, dbpassword);
