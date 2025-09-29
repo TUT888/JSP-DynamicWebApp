@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.Student;
 
 import java.io.IOException;
@@ -24,29 +25,39 @@ public class LoginServlet extends HttpServlet {
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("login.jsp");
+		// Check login status
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("loginId") != null) {
+			response.sendRedirect("home");
+		} else {
+			response.sendRedirect("login.jsp");
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String username = request.getParameter("username");
+		// Check login detail
+		String loginId = request.getParameter("login_id");
 		String password = request.getParameter("password");
 		StudentDAO studentDAO = new StudentDAO();
 
-		Student student = studentDAO.getStudentByLoginIdAndPassword(username, password);
+		Student student = studentDAO.getStudentByLoginIdAndPassword(loginId, password);
 		
 		if (student != null) {
-			request.setAttribute("studentName", student.getName());
+			// Create new session with login id
+			HttpSession session = request.getSession(true);
+			session.setAttribute("loginId", loginId);
+			session.setAttribute("studentName", student.getName());
+			
+//			request.setAttribute("studentName", student.getName());
 			RequestDispatcher dispatcher = request.getRequestDispatcher("home");
 			dispatcher.forward(request, response);
 		} else {
@@ -55,5 +66,4 @@ public class LoginServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 	}
-
 }

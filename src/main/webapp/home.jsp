@@ -41,10 +41,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	<br>
-	<button>
-		<a href="student-form.html" class="btn-link">Add new student</a>
-	</button>
 </body>
 </html>

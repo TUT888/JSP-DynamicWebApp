@@ -1,13 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="styles.css">
-<title>Student Form</title>
+<title>Student Register</title>
 </head>
 <body>
-	<h1>Student Form</h1>
-	<form action="student" method="POST">
+	<h1>Student Register</h1>
+	<form action="register" method="POST">
 		<label for="fname">Student name:</label><br> 
 		<input type="text" id="name" name="name" value=""><br> 
 		<label for="lname">Class name: </label><br> 
